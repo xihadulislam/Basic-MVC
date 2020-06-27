@@ -10,9 +10,6 @@ interface PostListViewMvc : ObservableViewMvc<PostListViewMvc.Listener> {
     interface Listener {
         fun onPostClicked(post: Post)
     }
-
-
     fun bindData(list: List<Post>)
-
-
 }
+
