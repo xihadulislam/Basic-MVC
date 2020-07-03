@@ -34,3 +34,4 @@ class PostListItemViewMvcImpl(
         title.text = post.title
     }
 }
+
