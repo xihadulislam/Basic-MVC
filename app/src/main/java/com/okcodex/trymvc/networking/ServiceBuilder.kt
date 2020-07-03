@@ -15,7 +15,6 @@ object ServiceBuilder {
             .client(okHttp.build())
 
     private val retrofit = builder.build()
-
     fun <T> buildService(serviceType: Class<T>): T {
         return retrofit.create(serviceType)
     }

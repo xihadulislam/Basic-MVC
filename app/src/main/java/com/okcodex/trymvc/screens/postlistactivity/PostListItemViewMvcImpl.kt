@@ -2,7 +2,6 @@ package com.okcodex.trymvc.screens.postlistactivity
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.okcodex.trymvc.R
@@ -11,7 +10,7 @@ import com.okcodex.trymvc.screens.common.BaseObservableViewMvc
 
 class PostListItemViewMvcImpl(
     layoutInflater: LayoutInflater,
-    parent: ViewGroup
+    parent: ViewGroup?
 ) : PostListItemViewMvc, BaseObservableViewMvc<PostListItemViewMvc.Listener>() {
 
 
@@ -35,5 +34,3 @@ class PostListItemViewMvcImpl(
         title.text = post.title
     }
 }
-
-

@@ -9,5 +9,4 @@ interface PostService {
     @GET("posts")
     fun getPosts(): Call<List<Post>>
 
-
 }
