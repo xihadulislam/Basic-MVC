@@ -17,22 +17,30 @@ import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity(), PostListViewMvc.Listener {
+class MainActivity : BaseActivity(), PostListViewMvc.Listener {
 
     private lateinit var mviewmvc: PostListViewMvc
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mviewmvc = PostListViewMvcImpl(LayoutInflater.from(this), null)
-        setContentView(mviewmvc.getRootView())
 
+
+        mviewmvc = getCompositionRoot().getViewMvcFactory().getPostListViewMvc(null)
+        setContentView(mviewmvc.getRootView())
         loadData()
 
     }
 
+
     private fun loadData() {
-        val destinationService = ServiceBuilder.buildService(PostService::class.java)
-        val requestCall = destinationService.getPosts()
+
+
+//        val destinationService = ServiceBuilder.buildService(PostService::class.java)
+//        val requestCall = destinationService.getPosts()
+//
+        val requestCall = getCompositionRoot().getPostService().getPosts()
+
+
         requestCall.enqueue(object : retrofit2.Callback<List<Post>> {
             override fun onFailure(call: Call<List<Post>>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "failed", Toast.LENGTH_LONG).show()
@@ -54,7 +62,7 @@ class MainActivity : AppCompatActivity(), PostListViewMvc.Listener {
         })
     }
 
-
+    
     override fun onStart() {
         super.onStart()
         mviewmvc.registerListener(this)

@@ -8,30 +8,29 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.okcodex.trymvc.R
 import com.okcodex.trymvc.model.Post
+import com.okcodex.trymvc.screens.common.ViewMvcFactory
 
-class PostAdapter(layoutInflater: LayoutInflater) : RecyclerView.Adapter<PostAdapter.ViewHolder>(),
+class PostAdapter(viewMvcFactory: ViewMvcFactory) : RecyclerView.Adapter<PostAdapter.ViewHolder>(),
     PostListItemViewMvc.Listener {
 
+    private var mViewMvcFactory: ViewMvcFactory = viewMvcFactory
 
-    private var mlayoutInflater: LayoutInflater = layoutInflater
-    private lateinit var postlist: List<Post>
+    private lateinit var postList: List<Post>
     var mlistener: Listener? = null
 
 
     interface Listener {
         fun onPostClicked(post: Post)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-        val postListViewMvc: PostListItemViewMvc = PostListItemViewMvcImpl(mlayoutInflater, parent)
+        val postListViewMvc: PostListItemViewMvc = mViewMvcFactory.getPostItemListViewMvc(parent)
         postListViewMvc.registerListener(this)
         return ViewHolder(postListViewMvc)
     }
 
     fun setPostList(posts: List<Post>) {
-        this.postlist = posts
+        this.postList = posts
         notifyDataSetChanged()
     }
 
@@ -42,21 +41,15 @@ class PostAdapter(layoutInflater: LayoutInflater) : RecyclerView.Adapter<PostAda
 
 
     override fun getItemCount(): Int {
-        if (this::postlist.isInitialized) return postlist.size
+        if (this::postList.isInitialized)  return postList.size
         else return 0
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.postListViewMvc.bindPosts(postlist[position])
-
+        holder.postListViewMvc.bindPosts(postList[position])
     }
 
-
-    class ViewHolder(val postListViewMvc: PostListItemViewMvc) :
-        RecyclerView.ViewHolder(postListViewMvc.getRootView()) {
-        val title: TextView = itemView.findViewById(R.id.item_textView)
-    }
-
+    class ViewHolder(val postListViewMvc: PostListItemViewMvc) : RecyclerView.ViewHolder(postListViewMvc.getRootView())
 
     override fun onPostClicked(post: Post) {
 

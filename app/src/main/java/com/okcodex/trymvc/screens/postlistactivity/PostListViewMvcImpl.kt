@@ -11,9 +11,10 @@ import com.okcodex.trymvc.model.Post
 import com.okcodex.trymvc.screens.common.BaseObservableViewMvc
 import com.okcodex.trymvc.screens.common.BaseViewMvc
 import com.okcodex.trymvc.screens.common.ObservableViewMvc
+import com.okcodex.trymvc.screens.common.ViewMvcFactory
 import kotlinx.android.synthetic.main.activity_main.*
 
-class PostListViewMvcImpl(layoutInflater: LayoutInflater, parent: ViewGroup?) :
+class PostListViewMvcImpl(layoutInflater: LayoutInflater, parent: ViewGroup?,  viewMvcFactory: ViewMvcFactory) :
     BaseObservableViewMvc<PostListViewMvc.Listener>(), PostListViewMvc, PostAdapter.Listener {
 
 
@@ -30,7 +31,7 @@ class PostListViewMvcImpl(layoutInflater: LayoutInflater, parent: ViewGroup?) :
         recyclerView.layoutManager = linearLayoutManager
 
 
-        mAdapter = PostAdapter(layoutInflater)
+        mAdapter = PostAdapter(viewMvcFactory)
         recyclerView.adapter = mAdapter
         mAdapter.setListener(this)
 

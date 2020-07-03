@@ -14,5 +14,4 @@ interface PostListViewMvc : ObservableViewMvc<PostListViewMvc.Listener> {
 
     fun bindData(list: List<Post>)
 
-
 }
