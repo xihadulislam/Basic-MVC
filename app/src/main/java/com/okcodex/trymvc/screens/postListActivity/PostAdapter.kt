@@ -1,13 +1,8 @@
-package com.okcodex.trymvc.screens.postlistactivity
+package com.okcodex.trymvc.screens.postListActivity
 
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.okcodex.trymvc.R
-import com.okcodex.trymvc.model.Post
+import com.okcodex.trymvc.model.pojo.Post
 import com.okcodex.trymvc.screens.common.ViewMvcFactory
 
 class PostAdapter(viewMvcFactory: ViewMvcFactory) : RecyclerView.Adapter<PostAdapter.ViewHolder>(),
@@ -34,14 +29,12 @@ class PostAdapter(viewMvcFactory: ViewMvcFactory) : RecyclerView.Adapter<PostAda
         notifyDataSetChanged()
     }
 
-
     fun setListener(listener: Listener) {
         mlistener = listener
     }
 
-
     override fun getItemCount(): Int {
-        if (this::postList.isInitialized)  return postList.size
+        if (this::postList.isInitialized) return postList.size
         else return 0
     }
 
@@ -49,7 +42,8 @@ class PostAdapter(viewMvcFactory: ViewMvcFactory) : RecyclerView.Adapter<PostAda
         holder.postListViewMvc.bindPosts(postList[position])
     }
 
-    class ViewHolder(val postListViewMvc: PostListItemViewMvc) : RecyclerView.ViewHolder(postListViewMvc.getRootView())
+    class ViewHolder(val postListViewMvc: PostListItemViewMvc) :
+        RecyclerView.ViewHolder(postListViewMvc.getRootView())
 
     override fun onPostClicked(post: Post) {
 

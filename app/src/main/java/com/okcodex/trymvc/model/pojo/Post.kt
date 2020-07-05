@@ -1,4 +1,5 @@
-package com.okcodex.trymvc.model
+package com.okcodex.trymvc.model.pojo
+
 
 data class Post(
     var userId: Int,

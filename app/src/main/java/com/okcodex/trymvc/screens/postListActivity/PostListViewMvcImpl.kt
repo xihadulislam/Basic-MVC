@@ -1,20 +1,19 @@
-package com.okcodex.trymvc.screens.postlistactivity
+package com.okcodex.trymvc.screens.postListActivity
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.okcodex.trymvc.R
-import com.okcodex.trymvc.model.Post
+import com.okcodex.trymvc.model.pojo.Post
 import com.okcodex.trymvc.screens.common.BaseObservableViewMvc
-import com.okcodex.trymvc.screens.common.BaseViewMvc
-import com.okcodex.trymvc.screens.common.ObservableViewMvc
 import com.okcodex.trymvc.screens.common.ViewMvcFactory
-import kotlinx.android.synthetic.main.activity_main.*
 
-class PostListViewMvcImpl(layoutInflater: LayoutInflater, parent: ViewGroup?,  viewMvcFactory: ViewMvcFactory) :
+class PostListViewMvcImpl(
+    layoutInflater: LayoutInflater,
+    parent: ViewGroup?,
+    viewMvcFactory: ViewMvcFactory
+) :
     BaseObservableViewMvc<PostListViewMvc.Listener>(), PostListViewMvc, PostAdapter.Listener {
 
 
@@ -22,21 +21,18 @@ class PostListViewMvcImpl(layoutInflater: LayoutInflater, parent: ViewGroup?,  v
     private var recyclerView: RecyclerView
     private val mAdapter: PostAdapter
 
-
     init {
-        setRootView(layoutInflater.inflate(R.layout.activity_main, parent, false))
+        setRootView(layoutInflater.inflate(R.layout.activity_post_list, parent, false))
         recyclerView = findViewId(R.id.recyID)
 
         linearLayoutManager = LinearLayoutManager(getRootView().context)
         recyclerView.layoutManager = linearLayoutManager
-
 
         mAdapter = PostAdapter(viewMvcFactory)
         recyclerView.adapter = mAdapter
         mAdapter.setListener(this)
 
     }
-
 
     override fun bindData(list: List<Post>) {
         mAdapter.setPostList(list)

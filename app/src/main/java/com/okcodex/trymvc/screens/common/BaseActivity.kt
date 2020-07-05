@@ -10,13 +10,13 @@ open class BaseActivity : AppCompatActivity() {
 
     private lateinit var mControllerCompositionRoot: ControllerCompositionRoot
 
-    protected  fun getCompositionRoot():ControllerCompositionRoot {
-        if (!this::mControllerCompositionRoot.isInitialized) mControllerCompositionRoot = ControllerCompositionRoot((application as MyApp).getCompositionRoot(),this)
+    protected fun getCompositionRoot(): ControllerCompositionRoot {
+        if (!this::mControllerCompositionRoot.isInitialized) mControllerCompositionRoot =
+            ControllerCompositionRoot((application as MyApp).getCompositionRoot(), this)
 
         return mControllerCompositionRoot
 
     }
-
 
 
 }

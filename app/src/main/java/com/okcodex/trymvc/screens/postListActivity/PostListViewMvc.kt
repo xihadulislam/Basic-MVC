@@ -1,8 +1,7 @@
-package com.okcodex.trymvc.screens.postlistactivity
+package com.okcodex.trymvc.screens.postListActivity
 
-import com.okcodex.trymvc.model.Post
+import com.okcodex.trymvc.model.pojo.Post
 import com.okcodex.trymvc.screens.common.ObservableViewMvc
-import com.okcodex.trymvc.screens.common.ViewMvc
 
 interface PostListViewMvc : ObservableViewMvc<PostListViewMvc.Listener> {
 
